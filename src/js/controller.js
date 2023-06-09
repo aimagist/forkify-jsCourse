@@ -128,6 +128,10 @@ const controlAddRecipe = async function (newRecipe) {
   }
 };
 
+const newFeature = function () {
+  console.log('Welcome to the app');
+};
+
 const init = function () {
   bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes); // acá delegamos el control del renderizado a recipeView. Controller es suscriptor ahora porque solo llama a recipeView para darle darle la función que le permitirá hacer su trabajo. || Mantenemos las cosas separadas
@@ -137,6 +141,7 @@ const init = function () {
   recipeView.addHandlerBookmark(controlAddBookmark);
   addRecipeView.addHandlerUpload(controlAddRecipe);
   // console.log(controlAddRecipe);
+  newFeature();
 };
 init();
 console.log('Welcome');
