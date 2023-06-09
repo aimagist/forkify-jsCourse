@@ -1,7 +1,5 @@
 import { API_URL } from './config.js';
 import { KEY } from './config.js';
-// import { getJSON } from './helpers.js';
-// import { sendJSON } from './helpers.js';
 import { AJAX } from './helpers.js';
 
 import { RESULTS_PER_PAGE } from './config.js';
@@ -18,9 +16,7 @@ export const state = {
 };
 
 const createRecipeObject = function (data) {
-  // console.log(data);
   const { recipe } = data.data;
-  // console.log(recipe);
 
   return {
     id: recipe.id,
@@ -45,7 +41,6 @@ export const loadRecipe = async function (id) {
     if (state.bookmarks.some(bookmark => bookmark.id === id))
       state.recipe.bookmarked = true;
     else state.recipe.bookmarked = false;
-    // console.log(state.recipe);
   } catch (err) {
     console.error(`${err} 🔥🔥🔥🔥`);
     throw err;
@@ -67,8 +62,6 @@ export const loadSearchResults = async function (query) {
       };
     });
     state.search.page = 1;
-    // console.log(state.search.results);
-    // console.log(state);
   } catch (err) {
     console.error(`${err} 🔥🔥🔥🔥`);
     throw err;
@@ -86,7 +79,6 @@ export const getSearchResultsPage = function (page = state.search.page) {
 
 export const updateServings = function (newServings = state.recipe.servings) {
   try {
-    // console.log(state.recipe.ingredients);
     state.recipe.ingredients.forEach(ingredient => {
       ingredient.quantity =
         (ingredient.quantity * newServings) / state.recipe.servings;
@@ -130,15 +122,12 @@ const init = function () {
   if (storage) state.bookmarks = JSON.parse(storage);
 };
 init();
-// console.log(state.bookmarks);
 
 const clearBookmarks = function () {
   localStorage.clear('bookmarks');
 };
-// clearBookmarks();
 
 export const uploadRecipe = async function (newRecipe) {
-  // console.log(newRecipe);
   try {
     const ingredients = Object.entries(newRecipe)
       .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
@@ -161,10 +150,8 @@ export const uploadRecipe = async function (newRecipe) {
       servings: +newRecipe.servings,
       ingredients,
     };
-    // console.log(recipe);
 
     const data = await AJAX(`${API_URL}?key=${KEY}`, recipe);
-    // console.log(data);
     state.recipe = createRecipeObject(data);
 
     addBookmark(state.recipe);

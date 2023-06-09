@@ -26,8 +26,6 @@ export default class View {
   }
 
   update(data) {
-    // if (!data || (Array.isArray(data) && data.length == 0))
-    //   return this.renderError();
     this._data = data;
     const newMarkup = this._generateMarkup();
     const newDOM = document.createRange().createContextualFragment(newMarkup);
@@ -41,7 +39,6 @@ export default class View {
         newEl.firstChild?.nodeValue?.trim() !== '' &&
         newEl !== undefined
       ) {
-        // console.log(`🔥` + newEl?.firstChild?.nodeValue?.trim());
         curEl.textContent = newEl.textContent;
       }
       // Updates changed ATTRIBUTES
@@ -85,7 +82,6 @@ export default class View {
   }
 
   renderMessage(message = this._message) {
-    // console.log(message);
     const markup = `
         <div class="message">
             <div>

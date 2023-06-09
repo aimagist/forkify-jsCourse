@@ -9,14 +9,6 @@ import 'core-js/stable';
 import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
 
-// https://forkify-api.herokuapp.com/v2
-
-///////////////////////////////////////
-
-// if (module.hot) {
-//   module.hot.accept();
-// }
-
 const controlRecipes = async function () {
   try {
     // Get Hash-id from URL
@@ -37,7 +29,6 @@ const controlRecipes = async function () {
     // 3- Render Recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
-    console.log(err);
     recipeView.renderError();
   }
 };
@@ -45,6 +36,7 @@ const controlRecipes = async function () {
 const controlSearchResults = async function () {
   try {
     resultsView.renderSpinner();
+
     // 1) Get search query
     const query = searchView.getQuery();
     if (!query) return;
@@ -53,13 +45,11 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // 3) Render results
-    // resultsView.render(model.state.search.results);
     resultsView.render(model.getSearchResultsPage());
 
     // 4) Render initial pagination buttons
     paginationView.render(model.state.search);
   } catch (err) {
-    console.log(err);
     searchView.renderError();
   }
 };
@@ -76,7 +66,6 @@ const controlServings = function (newServings) {
   // Update the recipe servings (in state)
   model.updateServings(newServings);
   // Update the recipe view
-  // recipeView.render(model.state.recipe);
   recipeView.update(model.state.recipe);
 };
 
@@ -116,7 +105,6 @@ const controlAddRecipe = async function (newRecipe) {
 
     // Change ID in URL
     window.history.pushState(null, '', `#${model.state.recipe.id}`);
-    // window.history.back()
 
     // Close form
     setTimeout(function () {
@@ -140,7 +128,6 @@ const init = function () {
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerBookmark(controlAddBookmark);
   addRecipeView.addHandlerUpload(controlAddRecipe);
-  // console.log(controlAddRecipe);
   newFeature();
 };
 init();
