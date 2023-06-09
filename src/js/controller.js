@@ -111,13 +111,8 @@ const controlAddRecipe = async function (newRecipe) {
       addRecipeView.toggleWindow();
     }, MODAL_CLOSE_SEC * 1000);
   } catch (err) {
-    console.error('🔴🔴', err);
     addRecipeView.renderError(err);
   }
-};
-
-const newFeature = function () {
-  console.log('Welcome to the app');
 };
 
 const init = function () {
@@ -131,4 +126,3 @@ const init = function () {
   newFeature();
 };
 init();
-console.log('Welcome');
