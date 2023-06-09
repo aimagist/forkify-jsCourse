@@ -7,7 +7,7 @@ import paginationView from './views/paginationView.js';
 import { MODAL_CLOSE_SEC } from './config.js';
 import 'core-js/stable';
 import bookmarksView from './views/bookmarksView.js';
-import addRecipeView from './views/AddRecipeView.js';
+import addRecipeView from './views/addRecipeView.js';
 
 // https://forkify-api.herokuapp.com/v2
 
